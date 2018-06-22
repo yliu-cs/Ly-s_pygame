@@ -11,6 +11,14 @@ Screen = pygame.display.set_mode(ScreenSize, 0, 32)
 pygame.display.set_caption("Ly's Snake Game")
 Difficulty = 10
 
+# 背景音乐
+pygame.mixer.music.load('BackgroundMusic.flac')
+pygame.mixer.music.play(-1, 0.0)
+
+EatFoodMusic = pygame.mixer.Sound('EatFoodMusic.wav')
+ClickMusic = pygame.mixer.Sound('ClickMusic.wav')
+
+# 蛇
 class snake():
     def __init__(self):
         self.Direction = K_RIGHT
@@ -67,6 +75,7 @@ class snake():
                 return
             self.Direction = Curkey
 
+# 食物
 class food():
     def __init__(self):
         self.Obj = pygame.Rect(-20, 0, 20, 20)
@@ -82,6 +91,7 @@ class food():
             self.Obj.left = random.choice(AllPos)
             self.Obj.top = random.choice(AllPos)
 
+# 难度选择及游戏
 def GameMain():
     global Difficulty
     FPSClock = pygame.time.Clock()
@@ -107,6 +117,7 @@ def GameMain():
                     IsChoice = True
                     break
             if event.type == KEYDOWN:
+                ClickMusic.play()
                 if event.key == K_UP:
                     Difficulty = Difficulty + 1
                 elif event.key == K_DOWN:
@@ -131,6 +142,7 @@ def GameMain():
                 pygame.quit()
                 sys.exit()
             if event.type == KEYDOWN:
+                ClickMusic.play()
                 Snake.ChangeDirection(event.key)
 
         Screen.blit(BackgroungImg, (0, 0))
@@ -144,6 +156,7 @@ def GameMain():
             return Score
 
         if Food.Obj == Snake.Body[0]:
+            EatFoodMusic.play()
             Score += Difficulty
             Food.Remove()
             Snake.AddBody()
@@ -158,6 +171,7 @@ def GameMain():
         pygame.display.update()
         FPSClock.tick(Difficulty)
 
+# 游戏结果
 def GameResult(Score):
     GameResultBackgroundImg = pygame.image.load('GRBgImg.png').convert()
     ScoreHintFont = pygame.font.SysFont('arial', 35)
