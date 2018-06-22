@@ -17,11 +17,11 @@ pygame.display.set_caption("Ly's Easy Ball Game")
 pygame.mixer.music.load('Sugar.mp3')
 pygame.mixer.music.play(-1, 0.0)
 # 碰撞音效
-CollisionMusic = pygame.mixer.Sound('collision.mp3')
+CollisionMusic = pygame.mixer.Sound('collision.wav')
 # 重新开始按钮音效
-ButtonMusic = pygame.mixer.Sound('button.mp3')
+ButtonMusic = pygame.mixer.Sound('button.wav')
 # 游戏结束音效
-GameOverMusic = pygame.mixer.Sound('over.mp3')
+GameOverMusic = pygame.mixer.Sound('over.wav')
 
 def GameStart():
     # 游戏背景Surface对象
